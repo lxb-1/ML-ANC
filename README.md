@@ -96,3 +96,5 @@
 - [使用Pytorch实现Grad-CAM并绘制热力图_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1e3411j7x7/?spm_id_from=333.788.recommend_more_video.-1&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
 
 🧰 **数据集**：
+
+- 回音消除研究数据集（AEC-Challenge）：[microsoft/AEC-Challenge: AEC Challenge](https://github.com/microsoft/AEC-Challenge)
