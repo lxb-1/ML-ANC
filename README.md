@@ -13,6 +13,8 @@
 
 - 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics)
 
+- Meta-AF: Meta-Learning for Adaptive Filters ([2022 arXiv](https://arxiv.org/pdf/2204.11942.pdf)) ：[adobe-research/MetaAF: Control adaptive filters with neural networks.](https://github.com/adobe-research/MetaAF#demos)
+
 - [smitkiri/urban-sound-classification: Classification of audio signals using PyTorch](https://github.com/smitkiri/urban-sound-classification)
 - python_speech_features仓库：[jameslyons/python_speech_features: This library provides common speech features for ASR including MFCCs and filterbank energies.](https://github.com/jameslyons/python_speech_features)
 - [sambittarai/Audio-Signal-Processing-using-Deep-Learning: This repository includes an entire workflow for Audio Classification using Deep Learning.](https://github.com/sambittarai/Audio-Signal-Processing-using-Deep-Learning)
@@ -20,6 +22,12 @@
 - ✨ WavEncoder:[shangeth/wavencoder: WavEncoder is a Python library for encoding audio signals, transforms for audio augmentation, and training audio classification models with PyTorch backend.](https://github.com/shangeth/wavencoder)。它设计了很多特有的块和层，可以参考参考文献中关于WavEncoder的相关文献。
 
 - ✨ 音频网络网络架构SincNet:[mravanelli/SincNet: SincNet is a neural architecture for efficiently processing raw audio samples.](https://github.com/mravanelli/SincNet)
+
+- 音频目标质量和可解释性指标Python实现仓库**pysepm**：[schmiph2/pysepm: Python implementation of performance metrics in Loizou's Speech Enhancement book](https://github.com/schmiph2/pysepm)
+
+- **Speexdsp-python**：[xiongyihui/speexdsp-python: Speex Echo Canceller Python Library](https://github.com/xiongyihui/speexdsp-python)
+
+- 语言识别到文本实现以及在线深度学习实现仓库（36.4k star）：[CorentinJ/Real-Time-Voice-Cloning: Clone a voice in 5 seconds to generate arbitrary speech in real-time](https://github.com/CorentinJ/Real-Time-Voice-Cloning) 作者硕士论文链接：[Master thesis : Automatic Multispeaker Voice Cloning - s123578Jemine2019.pdf](https://matheo.uliege.be/bitstream/2268.2/6801/5/s123578Jemine2019.pdf)
 
 - 音乐音频python分析包：[librosa/librosa: Python library for audio and music analysis](https://github.com/librosa/librosa)
 
