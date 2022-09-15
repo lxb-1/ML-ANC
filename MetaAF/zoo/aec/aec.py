@@ -19,32 +19,52 @@ from metaaf.meta import MetaAFTrainer
 from metaaf.callbacks import CheckpointCallback, WandBCallback, AudioLoggerCallback
 
 
-from zoo import metrics
-from zoo.__config__ import AEC_DATA_DIR, RIR_DATA_DIR
+# from zoo import metrics
+# from zoo.__config__ import AEC_DATA_DIR, RIR_DATA_DIR
+
+import metrics
+
+# 设置回声消除数据集加载根目录
+AEC_DATA_DIR = "/home/liang/DataSet/AEC-Challenge/"
+
 
 
 class MSFTAECDataset(Dataset):
+    """_summary_
+
+    Args:
+        Dataset (_type_): _description_
+    """
+
     def __init__(
         self,
-        base_dir=AEC_DATA_DIR,
-        mode="train",
-        double_talk=True,
-        scene_change=False,
-        random_roll=False,
-        max_len=160000,
+        base_dir=AEC_DATA_DIR,  # 存放AEC数据集的根文件位置，该参数在zoo.__config__文件中设置
+        mode="train",           # 训练模式：train、validation、test，默认为train
+        double_talk=True,       # 双重语音
+        scene_change=False,     # 场景变化，默认关闭
+        random_roll=False,      # 随机滚动
+        max_len=160000,         # 音频最大长度
     ):
 
+        # 在根文件目录中，合成语音文件路径
         synthetic_dir = os.path.join(base_dir, "datasets/synthetic/")
 
-        self.echo_signal_dir = os.path.join(synthetic_dir, "echo_signal")
-        self.farend_speech_dir = os.path.join(synthetic_dir, "farend_speech")
-        self.nearend_mic_dir = os.path.join(synthetic_dir, "nearend_mic_signal")
+        # 回声信号文件路径
+        self.echo_signal_dir    = os.path.join(synthetic_dir, "echo_signal")
+        # 远端信号文件路径
+        self.farend_speech_dir  = os.path.join(synthetic_dir, "farend_speech")
+        # 近端麦克风信号文件路径
+        self.nearend_mic_dir    = os.path.join(synthetic_dir, "nearend_mic_signal")
+        # 近端语音信号文件路径
         self.nearend_speech_dir = os.path.join(synthetic_dir, "nearend_speech")
+        # 信号的最大尺寸
         self.max_len = max_len
 
-        self.double_talk = double_talk
-        self.scene_change = scene_change
-        self.random_roll = random_roll
+        self.double_talk  = double_talk     # 设置双重语音
+        self.scene_change = scene_change    # 设置场景变换
+        self.random_roll  = random_roll     # 设置随机滚动
+
+        # 如果设置创建变换为True,则执行下面的代码
         if self.scene_change:
             if mode == "val":
                 np.random.seed(95)
@@ -64,47 +84,78 @@ class MSFTAECDataset(Dataset):
                 np.random.seed(1337)
                 self.random_rolls = np.random.randint(0, 160000, size=500)
 
+        # 设置数据训练模式
         self.mode = mode
-        if self.mode == "test":
+        if self.mode == "test":     # 如果为test模式，则设置偏置`offset`为0
             self.offset = 0
         elif self.mode == "val":
-            self.offset = 500
+            self.offset = 500       # 如果为validation模式，则设置偏置`offset`为500
         elif self.mode == "train":
-            self.offset = 1000
+            self.offset = 1000      # 如果为train模式，则设置偏置`offset`为1000
 
     def __len__(self):
         if self.mode == "test":
+            # 如果为test模式，数据长度为500
             return 500
         elif self.mode == "val":
+            # 如果为validation模式，数据长度为500
             return 500
         elif self.mode == "train":
+            # 如果为train模式，数据长度为9000
             return 9000
 
     def load_from_idx(self, idx):
+        """读取音频回声消除(AEC, Acoustic Echo Cancellation)处理需要的数据，并以指定格式字典格式返回数据
+
+        输入参数:
+            idx (_type_): 数据标签
+
+        返回值:
+            字典格式的数据，内容包括:
+            (1) `d` : 期望的滤波器输出
+            (2) `u` : 滤波器的输入信号
+            (3) `e` : 误差信号
+            (4) `s` : 近端语音(speech)信号
+        """
+
+        # 根据`offset`配置idx的机制：
         idx = idx + self.offset
+
+        # 如果使用`double_talk`模式则执行下面的代码，并读取`neared_mic_dir`文件中的音频数据作为目标信号d
         if self.double_talk:
+            # 滤波器期望值
             d, sr = sf.read(
                 os.path.join(self.nearend_mic_dir, f"nearend_mic_fileid_{idx}.wav")
             )
+        # 否则直接读取`echo_signal_dir`中的音频数据作为目标信号d
         else:
+            # 滤波器的期望值
             d, sr = sf.read(
                 os.path.join(self.echo_signal_dir, f"echo_fileid_{idx}.wav")
             )
 
+        # 读取远端`farend_speech_dir`文件夹中的语音信号作为滤波器的输入信号u
         u, sr = sf.read(
             os.path.join(self.farend_speech_dir, f"farend_speech_fileid_{idx}.wav")
         )
 
+        # 读取`echo_signal_dir`文件夹中的音频作为误差信号e
         e, sr = sf.read(os.path.join(self.echo_signal_dir, f"echo_fileid_{idx}.wav"))
+
+        # 读取`nearend_speech_dir`文件夹中的信号为语音信号
         s, sr = sf.read(
             os.path.join(self.nearend_speech_dir, f"nearend_speech_fileid_{idx}.wav")
         )
 
+        # 分别对滤波器输入u、目标输出d、误差e和语音信号s的边缘分别进行填充操作。
+        # 填充的机制为：在信号的尾部填充设置的最大信号长度`max_len - 信号长度`，这样使得
+        # 四种信号的长度保持一致。
         u = np.pad(u, (0, max(0, self.max_len - len(u))))
         d = np.pad(d, (0, max(0, self.max_len - len(d))))
         e = np.pad(e, (0, max(0, self.max_len - len(e))))
         s = np.pad(s, (0, max(0, self.max_len - len(s))))
 
+        # 如果随机滚动`random_roll`为`True`（默认为`False`），则执行下面的代码
         if self.random_roll:
             shift = (
                 np.random.randint(0, self.max_len)
@@ -119,6 +170,7 @@ class MSFTAECDataset(Dataset):
         return {"d": d[:, None], "u": u[:, None], "e": e[:, None], "s": s[:, None]}
 
     def __getitem__(self, idx):
+
         data_dict = self.load_from_idx(idx)
 
         if self.scene_change:
@@ -144,43 +196,50 @@ class MSFTAECDataset(Dataset):
 class MSFTAECDataset_RIR(Dataset):
     def __init__(
         self,
-        aec_dir=AEC_DATA_DIR,
-        rir_dir=RIR_DATA_DIR,
-        mode="train",
-        double_talk=True,
-        scene_change=False,
-        random_roll=False,
-        rir_len=None,
-        max_len=160000,
+        aec_dir      = AEC_DATA_DIR,    # 声学回声消除根文件夹
+        rir_dir      = RIR_DATA_DIR,    # 房间脉冲响应根文件夹
+        mode         = "train",         # 训练模式：train、validation、test，默认为train
+        double_talk  = True,            # 双重语音
+        scene_change = False,           # 场景变换
+        random_roll  = False,           # 随机滚动
+        rir_len      = None,            # RIR信号的长度
+        max_len      = 160000,          # 信号的最大长度
     ):
 
+        # 在根文件目录中，合成语音文件路径
         aec_synthetic_dir = os.path.join(aec_dir, "datasets/synthetic/")
+        # 获取房间脉冲响应根文件夹中simulated_rirs文件的路径
         rir_dir = os.path.join(rir_dir, "simulated_rirs/")
 
-        self.farend_speech_dir = os.path.join(aec_synthetic_dir, "farend_speech")
+        # 获取合成语音的远端语音
+        self.farend_speech_dir  = os.path.join(aec_synthetic_dir, "farend_speech")
+        # 获取合成语音的近端语音
         self.nearend_speech_dir = os.path.join(aec_synthetic_dir, "nearend_speech")
 
-        self.double_talk = double_talk
-        self.scene_change = scene_change
-        self.random_roll = random_roll
-        self.max_len = max_len
-        self.rir_len = rir_len
+        self.double_talk  = double_talk     # 双重语音
+        self.scene_change = scene_change    # 场景变换
+        self.random_roll  = random_roll     # 随机滚动
+        self.max_len      = max_len         # 信号最大的长度
+        self.rir_len      = rir_len         # RIR信号的长度
 
         # get same rir split every time
+        # 读取rir_dir目录下的所有.wav文件，sefl.rirs返回的是目标目录下所有.wav文件名字字符串列表
         self.rirs = glob2.glob(rir_dir + "/**/*.wav")
-        rng = np.random.RandomState(0)
+
+        # 将读取的RIR信号打乱顺序
+        rng       = np.random.RandomState(0)
         rng.shuffle(self.rirs)
 
-        if mode == "train":
+        if mode == "train":     # 使用第1000个到最后一个RIR信号作为训练数据
             self.rirs = self.rirs[1000:]
-        elif mode == "val":
+        elif mode == "val":     # 使用第500个到1000个信号作为验证数据
             self.rirs = self.rirs[500:1000]
-        elif mode == "test":
+        elif mode == "test":    # 使用前500个信号作为验证数据
             self.rirs = self.rirs[:500]
 
         if self.double_talk:
-            self.min_ser = -10
-            self.max_ser = 10
+            self.min_ser = -10  # 均匀分布的下限
+            self.max_ser = 10   # 均匀分布的上限
             if mode == "val":
                 np.random.seed(95)
                 self.sers = np.random.uniform(self.min_ser, self.max_ser, size=500)
@@ -190,7 +249,7 @@ class MSFTAECDataset_RIR(Dataset):
 
         if self.scene_change:
             start = int(0.4 * self.max_len)
-            stop = int(0.6 * self.max_len)
+            stop  = int(0.6 * self.max_len)
             if mode == "val":
                 np.random.seed(95)
                 self.scene_change_pair = np.arange(500)
@@ -212,34 +271,39 @@ class MSFTAECDataset_RIR(Dataset):
 
         self.mode = mode
         if self.mode == "test":
-            self.offset = 0
+            self.offset = 0     # 测试数据的起始点
         elif self.mode == "val":
-            self.offset = 500
+            self.offset = 500   # 验证数据的起始点
         elif self.mode == "train":
-            self.offset = 1000
+            self.offset = 1000  # 训练数据的起始点
 
     def __len__(self):
         if self.mode == "test":
-            return 500
+            return 500  # 测试数据的个数
         elif self.mode == "val":
-            return 500
+            return 500  # 验证数据的个数
         elif self.mode == "train":
-            return 9000
+            return 9000 # 训练数据的个数
 
     def load_from_idx(self, idx):
+        # ？？这里为什么要设置speech_idx这个变量？？
         speech_idx = idx + self.offset
         rir_idx = np.random.randint(len(self.rirs)) if self.mode == "train" else idx
+
+        # RIR信号的获取并赋值给w
         w, _ = sf.read(self.rirs[rir_idx])
 
         if self.rir_len is not None:
             w = w[: self.rir_len]
 
+        # 系统的输入信号u：读取远端语音信号
         u, sr = sf.read(
             os.path.join(
                 self.farend_speech_dir, f"farend_speech_fileid_{speech_idx}.wav"
             )
         )
 
+        # 使用scipy.signal.fftconvolve方法对u和w进行卷积运算得到误差信号e
         e = scipy.signal.fftconvolve(u, w)[: len(u)]
 
         if self.double_talk:
@@ -262,6 +326,7 @@ class MSFTAECDataset_RIR(Dataset):
 
         d = e + s
 
+        # wrap参数表示反向填充
         u = np.pad(u, (0, max(0, self.max_len - len(u))), "wrap")
         d = np.pad(d, (0, max(0, self.max_len - len(d))), "wrap")
         e = np.pad(e, (0, max(0, self.max_len - len(e))), "wrap")
@@ -292,7 +357,7 @@ class MSFTAECDataset_RIR(Dataset):
             next_data_dict = self.load_from_idx(scene_change_pair)
             for k, v in data_dict.items():
                 start = 64000  # int(0.4 * self.max_len)
-                stop = 96000  # int(0.6 * self.max_len)
+                stop  = 96000  # int(0.6 * self.max_len)
                 change_idx = (
                     np.random.randint(start, stop)
                     if self.mode == "train"
@@ -305,6 +370,12 @@ class MSFTAECDataset_RIR(Dataset):
 
 
 class AECOLS(OverlapSave, hk.Module):
+    """Acoustic Echo Cancellation (AEC) OLS计算
+
+    Args:
+        OverlapSave (_type_): _description_
+        hk (_type_): _description_
+    """
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # select the analysis window
@@ -316,10 +387,10 @@ class AECOLS(OverlapSave, hk.Module):
         d_hat = (w * u).sum(0)
         out = d[-1] - d_hat
         return {
-            "out": out,
-            "u": u,
-            "d": d[-1, None],
-            "e": out[None],
+            "out" : out,
+            "u"   : u,
+            "d"   : d[-1, None],
+            "e"   : out[None],
             "loss": jnp.vdot(out, out).real / out.size,
         }
 
@@ -431,11 +502,11 @@ if __name__ == "__main__":
     # make the dataloders
     train_loader = NumpyLoader(
         aec_dataset(
-            mode="train",
-            double_talk=kwargs["double_talk"],
-            scene_change=kwargs["scene_change"],
-            random_roll=kwargs["random_roll"],
-            max_len=200000,
+            mode         = "train",
+            double_talk  = kwargs["double_talk"],
+            scene_change = kwargs["scene_change"],
+            random_roll  = kwargs["random_roll"],
+            max_len      = 200000,
         ),
         batch_size=kwargs["batch_size"],
         shuffle=True,
@@ -443,20 +514,20 @@ if __name__ == "__main__":
     )
     val_loader = NumpyLoader(
         aec_dataset(
-            mode="val",
-            double_talk=kwargs["double_talk"],
-            scene_change=kwargs["scene_change"],
-            random_roll=kwargs["random_roll"],
+            mode         = "val",
+            double_talk  = kwargs["double_talk"],
+            scene_change = kwargs["scene_change"],
+            random_roll  = kwargs["random_roll"],
         ),
         batch_size=kwargs["batch_size"],
         num_workers=4,
     )
     test_loader = NumpyLoader(
         aec_dataset(
-            mode="test",
-            double_talk=kwargs["double_talk"],
-            scene_change=kwargs["scene_change"],
-            random_roll=kwargs["random_roll"],
+            mode         = "test",
+            double_talk  = kwargs["double_talk"],
+            scene_change = kwargs["scene_change"],
+            random_roll  = kwargs["random_roll"],
         ),
         batch_size=kwargs["batch_size"],
         num_workers=0,
@@ -470,10 +541,10 @@ if __name__ == "__main__":
     ]
 
     if kwargs["extra_signals"] == "none":
-        init_optimizer = optimizer_gru.init_optimizer
+        init_optimizer       = optimizer_gru.init_optimizer
         make_mapped_optmizer = optimizer_gru.make_mapped_optmizer
     elif kwargs["extra_signals"] == "ude":
-        init_optimizer = optimizer_gru.init_optimizer_all_data
+        init_optimizer       = optimizer_gru.init_optimizer_all_data
         make_mapped_optmizer = optimizer_gru.make_mapped_optmizer_all_data
 
     if kwargs["outer_loss"] == "self_mse":
@@ -486,26 +557,26 @@ if __name__ == "__main__":
         outer_train_loss = meta_log_mse_loss
 
     system = MetaAFTrainer(
-        _filter_fwd=_AECOLS_fwd,
-        filter_kwargs=AECOLS.grab_args(kwargs),
-        filter_loss=aec_loss,
-        train_loader=train_loader,
-        val_loader=val_loader,
-        test_loader=test_loader,
-        _optimizer_fwd=optimizer_gru._elementwise_gru_fwd,
-        optimizer_kwargs=optimizer_gru.ElementWiseGRU.grab_args(kwargs),
-        meta_train_loss=outer_train_loss,
-        meta_val_loss=neg_erle_val_loss,
-        init_optimizer=init_optimizer,
-        make_mapped_optmizer=make_mapped_optmizer,
-        callbacks=callbacks,
-        kwargs=kwargs,
+        _filter_fwd          = _AECOLS_fwd,
+        filter_kwargs        = AECOLS.grab_args(kwargs),
+        filter_loss          = aec_loss,
+        train_loader         = train_loader,
+        val_loader           = val_loader,
+        test_loader          = test_loader,
+        _optimizer_fwd       = optimizer_gru._elementwise_gru_fwd,
+        optimizer_kwargs     = optimizer_gru.ElementWiseGRU.grab_args(kwargs),
+        meta_train_loss      = outer_train_loss,
+        meta_val_loss        = neg_erle_val_loss,
+        init_optimizer       = init_optimizer,
+        make_mapped_optmizer = make_mapped_optmizer,
+        callbacks            = callbacks,
+        kwargs               = kwargs,
     )
 
     # start the training
     key = jax.random.PRNGKey(0)
     outer_learned, losses = system.train(
         **MetaAFTrainer.grab_args(kwargs),
-        meta_opt_kwargs={"step_size": 1e-4, "b1": kwargs["b1"]},
-        key=key,
+        meta_opt_kwargs = {"step_size": 1e-4, "b1": kwargs["b1"]},
+        key             = key,
     )

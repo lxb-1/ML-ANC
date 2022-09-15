@@ -152,19 +152,19 @@ def get_system_ckpt(ckpt_dir, e, model_type="egru", verbose=True):
         make_mapped_optmizer = rls.make_mapped_optmizer
 
     system = MetaAFTrainer(
-        _filter_fwd=eq._EQOLS_fwd,
-        filter_kwargs=eq.EQOLS.grab_args(kwargs),
-        filter_loss=eq.eq_loss,
-        optimizer_kwargs=optimizer_kwargs,
-        train_loader=train_loader,
-        val_loader=train_loader,
-        test_loader=train_loader,
-        meta_train_loss=outer_train_loss,
-        meta_val_loss=eq.neg_snr_val_loss,
-        _optimizer_fwd=_optimizer_fwd,
-        init_optimizer=init_optimizer,
-        make_mapped_optmizer=make_mapped_optmizer,
-        kwargs=kwargs,
+        _filter_fwd          = eq._EQOLS_fwd,
+        filter_kwargs        = eq.EQOLS.grab_args(kwargs),
+        filter_loss          = eq.eq_loss,
+        optimizer_kwargs     = optimizer_kwargs,
+        train_loader         = train_loader,
+        val_loader           = train_loader,
+        test_loader          = train_loader,
+        meta_train_loss      = outer_train_loss,
+        meta_val_loss        = eq.neg_snr_val_loss,
+        _optimizer_fwd       = _optimizer_fwd,
+        init_optimizer       = init_optimizer,
+        make_mapped_optmizer = make_mapped_optmizer,
+        kwargs               = kwargs,
     )
     system.outer_learnable = outer_learnable
     return system, kwargs, outer_learnable

@@ -13,13 +13,17 @@
 
 - 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics)
 
+- [pyannote/pyannote-audio: Neural building blocks for speaker diarization: speech activity detection, speaker change detection, overlapped speech detection, speaker embedding](https://github.com/pyannote/pyannote-audio) [手册](https://pyannote.github.io/pyannote-core/structure.html)
+
+- **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
+
 - Meta-AF: Meta-Learning for Adaptive Filters ([2022 arXiv](https://arxiv.org/pdf/2204.11942.pdf)) ：[adobe-research/MetaAF: Control adaptive filters with neural networks.](https://github.com/adobe-research/MetaAF#demos)
 
 - [smitkiri/urban-sound-classification: Classification of audio signals using PyTorch](https://github.com/smitkiri/urban-sound-classification)
 - python_speech_features仓库：[jameslyons/python_speech_features: This library provides common speech features for ASR including MFCCs and filterbank energies.](https://github.com/jameslyons/python_speech_features)
 - [sambittarai/Audio-Signal-Processing-using-Deep-Learning: This repository includes an entire workflow for Audio Classification using Deep Learning.](https://github.com/sambittarai/Audio-Signal-Processing-using-Deep-Learning)
 
-- ✨ WavEncoder:[shangeth/wavencoder: WavEncoder is a Python library for encoding audio signals, transforms for audio augmentation, and training audio classification models with PyTorch backend.](https://github.com/shangeth/wavencoder)。它设计了很多特有的块和层，可以参考参考文献中关于WavEncoder的相关文献。
+- ✨ WavEncoder:[shangeth/wavencoder: WavEncoder is a Python library for encoding audio signals, transforms for audio augmentation, and training audio classification models with PyTorch backend.](https://github.com/shangeth/wavencoder)。它设计了很多特有的块和层，可以参考文献中关于WavEncoder的相关文献。
 
 - ✨ 音频网络网络架构SincNet:[mravanelli/SincNet: SincNet is a neural architecture for efficiently processing raw audio samples.](https://github.com/mravanelli/SincNet)
 
@@ -37,6 +41,99 @@
 
 - Speechbrain：[speechbrain/speechbrain: A PyTorch-based Speech Toolkit](https://github.com/speechbrain/speechbrain)
 
+
+#### 📊 基于Pytorch的音频相关损失函数合计仓库：[csteinmetz1/auraloss: Collection of audio-focused loss functions in PyTorch](https://github.com/csteinmetz1/auraloss)
+
+相关论文链接如下表所示：
+
+<table>
+    <tr>
+        <th>Loss function</th>
+        <th>Interface</th>
+        <th>Reference</th>
+    </tr>
+    <tr>
+        <td colspan="3" align="center"><b>Time domain</b></td>
+    </tr>
+    <tr>
+        <td>Error-to-signal ratio (ESR)</td>
+        <td><code>auraloss.time.ESRLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/1911.08922>Wright & Välimäki, 2019</a></td>
+    </tr>
+    <tr>
+        <td>DC error (DC)</td>
+        <td><code>auraloss.time.DCLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/1911.08922>Wright & Välimäki, 2019</a></td>
+    </tr>
+    <tr>
+        <td>Log hyperbolic cosine (Log-cosh)</td>
+        <td><code>auraloss.time.LogCoshLoss()</code></td>
+        <td><a href=https://openreview.net/forum?id=rkglvsC9Ym>Chen et al., 2019</a></td>
+    </tr>
+    <tr>
+        <td>Signal-to-noise ratio (SNR)</td>
+        <td><code>auraloss.time.SNRLoss()</code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Scale-invariant signal-to-distortion <br>  ratio (SI-SDR)</td>
+        <td><code>auraloss.time.SISDRLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/1811.02508>Le Roux et al., 2018</a></td>
+    </tr>
+    <tr>
+        <td>Scale-dependent signal-to-distortion <br>  ratio (SD-SDR)</td>
+        <td><code>auraloss.time.SDSDRLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/1811.02508>Le Roux et al., 2018</a></td>
+    </tr>
+    <tr>
+        <td colspan="3" align="center"><b>Frequency domain</b></td>
+    </tr>
+    <tr>
+        <td>Aggregate STFT</td>
+        <td><code>auraloss.freq.STFTLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/1808.06719>Arik et al., 2018</a></td>
+    </tr>
+    <tr>
+        <td>Aggregate Mel-scaled STFT</td>
+        <td><code>auraloss.freq.MelSTFTLoss(sample_rate)</code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Multi-resolution STFT</td>
+        <td><code>auraloss.freq.MultiResolutionSTFTLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/1910.11480>Yamamoto et al., 2019*</a></td>
+    </tr>
+    <tr>
+        <td>Random-resolution STFT</td>
+        <td><code>auraloss.freq.RandomResolutionSTFTLoss()</code></td>
+        <td><a href=https://www.christiansteinmetz.com/s/DMRN15__auraloss__Audio_focused_loss_functions_in_PyTorch.pdf>Steinmetz & Reiss, 2020</a></td>
+    </tr>
+    <tr>
+        <td>Sum and difference STFT loss</td>
+        <td><code>auraloss.freq.SumAndDifferenceSTFTLoss()</code></td>
+        <td><a href=https://arxiv.org/abs/2010.10291>Steinmetz et al., 2020</a></td>
+    </tr>
+    <tr>
+        <td colspan="3" align="center"><b>Perceptual transforms</b></td>
+    </tr>
+    <tr>
+        <td>Sum and difference signal transform</td>
+        <td><code>auraloss.perceptual.SumAndDifference()</code></td>
+        <td><a href=#></a></td>
+    </tr>
+    <tr>
+        <td>FIR pre-emphasis filters</td>
+        <td><code>auraloss.perceptual.FIRFilter()</code></td>
+        <td><a href=https://arxiv.org/abs/1911.08922>Wright & Välimäki, 2019</a></td>
+    </tr>
+</table>
+
+\* [Wang et al., 2019](https://arxiv.org/abs/1904.12088) also propose a multi-resolution spectral loss (that [Engel et al., 2020](https://arxiv.org/abs/2001.04643) follow), 
+but they do not include both the log magnitude (L1 distance) and spectral convergence terms, introduced in [Arik et al., 2018](https://arxiv.org/abs/1808.0671), and then extended for the multi-resolution case in [Yamamoto et al., 2019](https://arxiv.org/abs/1910.11480).
+
+#### 🦄 多目标优化仓库
+
+- [jMetal/jMetalPy: A framework for single/multi-objective optimization with metaheuristics](https://github.com/jMetal/jMetalPy#installation) 📚 [jMetal/jMetaalPY帮助文档](https://jmetal.github.io/jMetalPy/tutorials/observer.html)
 
 #### 🌀 基于深度学习的自适应滤波相关仓库：
 - Meta-AF: 基于Meta-Learning的自适应滤波仓库：[adobe-research/MetaAF: Control adaptive filters with neural networks.](https://github.com/adobe-research/MetaAF)
@@ -97,4 +194,5 @@
 
 🧰 **数据集**：
 
-- 回音消除研究数据集（AEC-Challenge）：[microsoft/AEC-Challenge: AEC Challenge](https://github.com/microsoft/AEC-Challenge)
+- 回音消除研究数据集（AEC-Challenge）：[microsoft/AEC-Challenge: AEC Challenge](https://github.com/microsoft/AEC-Challenge) [相关论文：ICASSP 2021 Acoustic Echo Cancellation Challenge: Datasets, Testing Framework, and Results](https://arxiv.org/pdf/2009.04972.pdf)
+- 

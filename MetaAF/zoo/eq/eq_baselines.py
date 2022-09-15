@@ -13,7 +13,8 @@ import metaaf.optimizer_rmsprop as rms
 import metaaf.optimizer_rls as rls
 from metaaf.callbacks import CheckpointCallback
 
-import zoo.eq.eq as eq
+# import zoo.eq.eq as eq
+import eq
 
 """
 Sample command to tune a baseline:
@@ -48,28 +49,28 @@ if __name__ == "__main__":
 
     val_loader = NumpyLoader(
         eq.EQDAPSDataset(mode="val", n_signals=2048),
-        batch_size=kwargs["batch_size"],
-        num_workers=2,
+        batch_size  = kwargs["batch_size"],
+        num_workers = 2,
     )
     test_loader = NumpyLoader(
         eq.EQDAPSDataset(mode="test", n_signals=2048, is_fir=True),
-        batch_size=kwargs["batch_size"],
-        num_workers=0,
+        batch_size  = kwargs["batch_size"],
+        num_workers = 0,
     )
 
     system = MetaAFTrainer(
-        _filter_fwd=eq._EQOLS_fwd,
-        filter_kwargs=eq.EQOLS.grab_args(kwargs),
-        filter_loss=eq.eq_loss,
-        train_loader=val_loader,
-        val_loader=val_loader,
-        test_loader=test_loader,
-        _optimizer_fwd=optimizer_pkg._fwd,
-        optimizer_kwargs=optimizer_pkg.grab_args(kwargs),
-        meta_val_loss=eq.neg_snr_val_loss,
-        init_optimizer=optimizer_pkg.init_optimizer,
-        make_mapped_optmizer=optimizer_pkg.make_mapped_optmizer,
-        kwargs=kwargs,
+        _filter_fwd          = eq._EQOLS_fwd,
+        filter_kwargs        = eq.EQOLS.grab_args(kwargs),
+        filter_loss          = eq.eq_loss,
+        train_loader         = val_loader,
+        val_loader           = val_loader,
+        test_loader          = test_loader,
+        _optimizer_fwd       = optimizer_pkg._fwd,
+        optimizer_kwargs     = optimizer_pkg.grab_args(kwargs),
+        meta_val_loss        = eq.neg_snr_val_loss,
+        init_optimizer       = optimizer_pkg.init_optimizer,
+        make_mapped_optmizer = optimizer_pkg.make_mapped_optmizer,
+        kwargs               = kwargs,
     )
 
     # epochs set to zero, this is just an initialization

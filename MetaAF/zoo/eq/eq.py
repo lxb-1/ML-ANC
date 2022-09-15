@@ -22,36 +22,49 @@ from metaaf import optimizer_gru
 from metaaf.optimizer_gru import ElementWiseGRU
 from metaaf.callbacks import CheckpointCallback, WandBCallback, AudioLoggerCallback
 
-from zoo import metrics
-from zoo.__config__ import EQ_DATA_DIR
+# from zoo import metrics
+# from zoo.__config__ import EQ_DATA_DIR
 
+import metrics
+EQ_DATA_DIR = '/home/liang/文档/Coding/Machine Learning/博士小论文代码/cmu_arctic_wav'
 
 class EQDAPSDataset(Dataset):
     def __init__(
         self,
-        base_dir=EQ_DATA_DIR,
-        signal_len=80000,
-        mode="train",
-        dry_file_splits=[0.6, 0.2, 0.2],
-        n_signals=1000,
-        is_fir=False,
+        base_dir        = EQ_DATA_DIR,      # 信号源根目录
+
+        # signal_len      = 80000,            # 信号长度
+        signal_len      = 10000,            # 信号长度
+        # signal_len      = len(glob.glob(EQ_DATA_DIR)),   # 根据数据集的数据长度设置响应的长度
+
+        mode            = "train",          # 训练模式包括：`train`、`validatian`、`test`，默认为`train`
+        dry_file_splits = [0.6, 0.2, 0.2],  # 训练集、验证集、测试集划分
+        # n_signals       = 1000,             # 数据块
+        n_signals       = 100,              # 根据实际情况设置该参数
+        is_fir          = False,            # ？？
     ):
 
-        self.mode = mode
-        self.base_dir = base_dir
+        self.mode      = mode
+        self.base_dir  = base_dir
         self.n_signals = n_signals
-        self.sr = 16000
-        self.is_fir = is_fir
+        self.sr        = 16000      # 数据块
+        self.is_fir    = is_fir
 
         # Making the dataset
         # grab and partition the dry files for no data overlap
         random.seed(7)
-        dry_files = glob.glob(os.path.join(base_dir, "cleanraw") + "/*.wav")
+
+        # 数据集不同读取文件dry_files的方式不同
+        # dry_files = glob.glob(os.path.join(base_dir, "cleanraw") + "/*.wav")
+
+        # 修改后的读取方式
+        dry_files = glob.glob(base_dir + "/*.wav")
+
         random.shuffle(dry_files)
 
         n_train = int(len(dry_files) * dry_file_splits[0])
-        n_val = int(len(dry_files) * dry_file_splits[1])
-        n_test = int(len(dry_files) * dry_file_splits[2])
+        n_val   = int(len(dry_files) * dry_file_splits[1])
+        n_test  = int(len(dry_files) * dry_file_splits[2])
 
         if mode == "train":
             files = dry_files[:n_train]
@@ -77,33 +90,35 @@ class EQDAPSDataset(Dataset):
         # 3. make a random eq filter
 
         self.data = []
+
+        # 一次性处理的信号块，由n_signals确定
         for i in range(n_signals):
             # pick the file
             file_idx = np.random.randint(0, len(files))
 
             # pick the chunks
-            f = sf.SoundFile(files[file_idx])
-            n_samples = f.frames
-            file_sr = f.samplerate
+            f         = sf.SoundFile(files[file_idx])   # 读取.wav信号
+            n_samples = f.frames                        # 信号的采样率
+            file_sr   = f.samplerate                    #
 
             lenght_in_file_sr = int(signal_len / self.sr * file_sr)
-            start_idx = np.random.randint(0, n_samples - lenght_in_file_sr)
-            stop_idx = start_idx + lenght_in_file_sr
+            start_idx         = np.random.randint(0, n_samples - lenght_in_file_sr)
+            stop_idx          = start_idx + lenght_in_file_sr
 
             # make the random effect
             n_effects = np.random.randint(5, 15)
-            c = np.random.randint(1, 8000, size=n_effects)
-            q = np.random.uniform(0.1, 10, size=n_effects)
-            g = np.random.uniform(-18, 18, size=n_effects)
+            c         = np.random.randint(1, 8000, size=n_effects)
+            q         = np.random.uniform(0.1, 10, size=n_effects)
+            g         = np.random.uniform(-18, 18, size=n_effects)
 
             effects = [
                 ["equalizer", str(c[i]), str(q[i]), str(g[i])] for i in range(n_effects)
             ]
 
             cur_data = {
-                "file": files[file_idx],
-                "start": start_idx,
-                "stop": stop_idx,
+                "file"   : files[file_idx],
+                "start"  : start_idx,
+                "stop"   : stop_idx,
                 "effects": effects,
             }
             self.data.append(cur_data)
@@ -114,8 +129,8 @@ class EQDAPSDataset(Dataset):
     def __getitem__(self, idx):
         d, sr = sf.read(
             self.data[idx]["file"],
-            start=self.data[idx]["start"],
-            stop=self.data[idx]["stop"],
+            start = self.data[idx]["start"],
+            stop  = self.data[idx]["stop"],
         )
 
         d_torch = torch.tensor(d.astype("float32"))
@@ -171,10 +186,10 @@ class EQOLS(OverlapSave, hk.Module):
         e = d[-1] - d_hat
 
         return {
-            "out": d_hat,
-            "u": u[-1, None],
-            "d": d,
-            "e": e[None],
+            "out" : d_hat,
+            "u"   : u[-1, None],
+            "d"   : d,
+            "e"   : e[None],
             "loss": jnp.vdot(e, e).real / e.size,
         }
 
@@ -224,8 +239,11 @@ def neg_snr_val_loss(losses, outputs, data_samples, metadata, outer_learnable):
 Aliased
 python eq.py --n_frames 1 --window_size 1024 --hop_size 512 --n_in_chan 1 --n_out_chan 1 --is_real --n_devices 2 --batch_size 64 --total_epochs 1000 --val_period 10 --reduce_lr_patience 1 --early_stop_patience 4 --name meta_eq_none_16_c --unroll 16 --constraint none
 
+实际训练参数：
+python eq.py --n_frames 1 --window_size 512 --hop_size 256 --n_in_chan 1 --n_out_chan 1 --is_real --n_devices 2 --batch_size 32 --total_epochs 200 --val_period 10 --reduce_lr_patience 1 --early_stop_patience 4 --name meta_eq_none_16_c --unroll 16 --constraint none
+
 Anti-Aliased
-python eq.py --n_frames 1 --window_size 1024 --hop_size 512 --n_in_chan 1 --n_out_chan 1 --is_real --n_devices 2 --batch_size 64 --total_epochs 1000 --val_period 10 --reduce_lr_patience 1 --early_stop_patience 4 --name meta_eq_antialias_16_c --unroll 16 --constraint antialias
+python eq.py --n_frames 1 --window_size 1024 --hop_size 512 --n_in_chan 1 --n_out_chan 1 --is_real --n_devices 1 --batch_size 64 --total_epochs 1000 --val_period 10 --reduce_lr_patience 1 --early_stop_patience 4 --name meta_eq_antialias_16_c --unroll 16 --constraint antialias
 """
 if __name__ == "__main__":
     import pprint
@@ -265,19 +283,19 @@ if __name__ == "__main__":
     ]
 
     system = MetaAFTrainer(
-        _filter_fwd=_EQOLS_fwd,
-        filter_kwargs=EQOLS.grab_args(kwargs),
-        filter_loss=eq_loss,
-        train_loader=train_loader,
-        val_loader=val_loader,
-        test_loader=test_loader,
-        optimizer_kwargs=ElementWiseGRU.grab_args(kwargs),
-        meta_train_loss=meta_log_mse_loss,
-        meta_val_loss=neg_snr_val_loss,
-        init_optimizer=optimizer_gru.init_optimizer_all_data,
-        make_mapped_optmizer=optimizer_gru.make_mapped_optmizer_all_data,
-        callbacks=callbacks,
-        kwargs=kwargs,
+        _filter_fwd          = _EQOLS_fwd,
+        filter_kwargs        = EQOLS.grab_args(kwargs),
+        filter_loss          = eq_loss,
+        train_loader         = train_loader,
+        val_loader           = val_loader,
+        test_loader          = test_loader,
+        optimizer_kwargs     = ElementWiseGRU.grab_args(kwargs),
+        meta_train_loss      = meta_log_mse_loss,
+        meta_val_loss        = neg_snr_val_loss,
+        init_optimizer       = optimizer_gru.init_optimizer_all_data,
+        make_mapped_optmizer = optimizer_gru.make_mapped_optmizer_all_data,
+        callbacks            = callbacks,
+        kwargs               = kwargs,
     )
 
     # start the training
