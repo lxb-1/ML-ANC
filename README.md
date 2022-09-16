@@ -11,9 +11,11 @@
 
 #### 🔊 音频处理相关仓库：
 
-- 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics)
+- 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics) 📖 [API文档](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.html#)
 
-- 简化的Python音频特征提取包Spafe：[SuperKogito/spafe: spafe: Simplified Python Audio Features Extraction](https://github.com/SuperKogito/spafe) [API文档](https://superkogito.github.io/spafe/v0.2.0/api_documentation.html)
+- 简化的Python音频特征提取包Spafe：[SuperKogito/spafe: spafe: Simplified Python Audio Features Extraction](https://github.com/SuperKogito/spafe) 📖 [API文档](https://superkogito.github.io/spafe/v0.2.0/api_documentation.html)
+
+- Play and Record Sound with Python：[spatialaudio/python-sounddevice: Play and Record Sound with Python](https://github.com/spatialaudio/python-sounddevice) 📖 [API文档](https://python-sounddevice.readthedocs.io/en/0.4.5/index.html)
 
 - [pyannote/pyannote-audio: Neural building blocks for speaker diarization: speech activity detection, speaker change detection, overlapped speech detection, speaker embedding](https://github.com/pyannote/pyannote-audio) [手册](https://pyannote.github.io/pyannote-core/structure.html)
 
