@@ -13,6 +13,8 @@
 
 - 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics)
 
+- 简化的Python音频特征提取包Spafe：[SuperKogito/spafe: spafe: Simplified Python Audio Features Extraction](https://github.com/SuperKogito/spafe) [API文档](https://superkogito.github.io/spafe/v0.2.0/api_documentation.html)
+
 - [pyannote/pyannote-audio: Neural building blocks for speaker diarization: speech activity detection, speaker change detection, overlapped speech detection, speaker embedding](https://github.com/pyannote/pyannote-audio) [手册](https://pyannote.github.io/pyannote-core/structure.html)
 
 - **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
@@ -192,7 +194,9 @@ but they do not include both the log magnitude (L1 distance) and spectral conver
 - [基于深度学习的目标检测算法!小目标Trick | Detectron2、YOLOv5都通用的小目标检测教程来袭！_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV16G411W7Wp?spm_id_from=333.337.search-card.all.click&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
 - [使用Pytorch实现Grad-CAM并绘制热力图_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1e3411j7x7/?spm_id_from=333.788.recommend_more_video.-1&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
 
-🧰 **数据集**：
+🧰 **音频数据集**：
+
+- TIMIT音频数据集：[TIMIT Corpus — Pyroomacoustics 0.6.0 documentation](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.timit.html#the-timit-dataset)
 
 - 回音消除研究数据集（AEC-Challenge）：[microsoft/AEC-Challenge: AEC Challenge](https://github.com/microsoft/AEC-Challenge) [相关论文：ICASSP 2021 Acoustic Echo Cancellation Challenge: Datasets, Testing Framework, and Results](https://arxiv.org/pdf/2009.04972.pdf)
 - 
