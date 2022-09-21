@@ -135,6 +135,12 @@
 \* [Wang et al., 2019](https://arxiv.org/abs/1904.12088) also propose a multi-resolution spectral loss (that [Engel et al., 2020](https://arxiv.org/abs/2001.04643) follow), 
 but they do not include both the log magnitude (L1 distance) and spectral convergence terms, introduced in [Arik et al., 2018](https://arxiv.org/abs/1808.0671), and then extended for the multi-resolution case in [Yamamoto et al., 2019](https://arxiv.org/abs/1910.11480).
 
+
+#### 控制系统仓库
+
+- 基于 Python 的控制系统：[python-control/python-control: The Python Control Systems Library is a Python module that implements basic operations for analysis and design of feedback control systems.](https://github.com/python-control/python-control) 📖 [API文档](https://python-control.readthedocs.io/en/latest/intro.html)
+
+
 #### 🦄 多目标优化仓库
 
 - [jMetal/jMetalPy: A framework for single/multi-objective optimization with metaheuristics](https://github.com/jMetal/jMetalPy#installation) 📚 [jMetal/jMetaalPY帮助文档](https://jmetal.github.io/jMetalPy/tutorials/observer.html)
