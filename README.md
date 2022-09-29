@@ -13,25 +13,28 @@
 
 - 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics) 📖 [API文档](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.html#)
 
+- **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
+
+- 音频目标质量和可解释性指标Python实现仓库**pysepm**：[schmiph2/pysepm: Python implementation of performance metrics in Loizou's Speech Enhancement book](https://github.com/schmiph2/pysepm)
+
 - 简化的Python音频特征提取包Spafe：[SuperKogito/spafe: spafe: Simplified Python Audio Features Extraction](https://github.com/SuperKogito/spafe) 📖 [API文档](https://superkogito.github.io/spafe/v0.2.0/api_documentation.html)
 
 - Play and Record Sound with Python：[spatialaudio/python-sounddevice: Play and Record Sound with Python](https://github.com/spatialaudio/python-sounddevice) 📖 [API文档](https://python-sounddevice.readthedocs.io/en/0.4.5/index.html)
 
 - [pyannote/pyannote-audio: Neural building blocks for speaker diarization: speech activity detection, speaker change detection, overlapped speech detection, speaker embedding](https://github.com/pyannote/pyannote-audio) [手册](https://pyannote.github.io/pyannote-core/structure.html)
 
-- **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
-
 - Meta-AF: Meta-Learning for Adaptive Filters ([2022 arXiv](https://arxiv.org/pdf/2204.11942.pdf)) ：[adobe-research/MetaAF: Control adaptive filters with neural networks.](https://github.com/adobe-research/MetaAF#demos)
 
+- `LEAF`: A Learnable Audio Frontend : [google-research/leaf-audio: LEAF is a learnable alternative to audio features such as mel-filterbanks, that can be initialized as an approximation of mel-filterbanks, and then be trained for the task at hand, while using a very small number of parameters.](https://github.com/google-research/leaf-audio)
+
 - [smitkiri/urban-sound-classification: Classification of audio signals using PyTorch](https://github.com/smitkiri/urban-sound-classification)
+- 
 - python_speech_features仓库：[jameslyons/python_speech_features: This library provides common speech features for ASR including MFCCs and filterbank energies.](https://github.com/jameslyons/python_speech_features)
 - [sambittarai/Audio-Signal-Processing-using-Deep-Learning: This repository includes an entire workflow for Audio Classification using Deep Learning.](https://github.com/sambittarai/Audio-Signal-Processing-using-Deep-Learning)
 
 - ✨ WavEncoder:[shangeth/wavencoder: WavEncoder is a Python library for encoding audio signals, transforms for audio augmentation, and training audio classification models with PyTorch backend.](https://github.com/shangeth/wavencoder)。它设计了很多特有的块和层，可以参考文献中关于WavEncoder的相关文献。
 
 - ✨ 音频网络网络架构SincNet:[mravanelli/SincNet: SincNet is a neural architecture for efficiently processing raw audio samples.](https://github.com/mravanelli/SincNet)
-
-- 音频目标质量和可解释性指标Python实现仓库**pysepm**：[schmiph2/pysepm: Python implementation of performance metrics in Loizou's Speech Enhancement book](https://github.com/schmiph2/pysepm)
 
 - **Speexdsp-python**：[xiongyihui/speexdsp-python: Speex Echo Canceller Python Library](https://github.com/xiongyihui/speexdsp-python)
 
@@ -44,7 +47,6 @@
 - （FaceBook）前沿序列建模工具包（Fairseq）：[facebookresearch/fairseq: Facebook AI Research Sequence-to-Sequence Toolkit written in Python.](https://github.com/facebookresearch/fairseq)
 
 - Speechbrain：[speechbrain/speechbrain: A PyTorch-based Speech Toolkit](https://github.com/speechbrain/speechbrain)
-
 
 #### 📊 基于Pytorch的音频相关损失函数合计仓库：[csteinmetz1/auraloss: Collection of audio-focused loss functions in PyTorch](https://github.com/csteinmetz1/auraloss)
 
