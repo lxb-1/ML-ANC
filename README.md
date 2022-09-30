@@ -4,18 +4,15 @@
 
 本程序主要研究基于机器学习的有源噪声控制算法的设计与测试，主要研究内容如下所示：
 
-
-
-
 ### 🌍 用到的的Github代码如下所示：
 
 #### 🔊 音频处理相关仓库：
 
 - 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics) 📖 [API文档](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.html#)
 
-- **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
-
 - 音频目标质量和可解释性指标Python实现仓库**pysepm**：[schmiph2/pysepm: Python implementation of performance metrics in Loizou's Speech Enhancement book](https://github.com/schmiph2/pysepm)
+
+- **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
 
 - 简化的Python音频特征提取包Spafe：[SuperKogito/spafe: spafe: Simplified Python Audio Features Extraction](https://github.com/SuperKogito/spafe) 📖 [API文档](https://superkogito.github.io/spafe/v0.2.0/api_documentation.html)
 
@@ -47,6 +44,16 @@
 - （FaceBook）前沿序列建模工具包（Fairseq）：[facebookresearch/fairseq: Facebook AI Research Sequence-to-Sequence Toolkit written in Python.](https://github.com/facebookresearch/fairseq)
 
 - Speechbrain：[speechbrain/speechbrain: A PyTorch-based Speech Toolkit](https://github.com/speechbrain/speechbrain)
+
+#### 🦄 多目标优化仓库
+
+- ✨ SPEA2 Github 仓库 (Strength Pareto Evolutionary Algorithm v2) : [Jagoslav/SPEA2: Strength Pareto Evolutionary Algorithm v2 implementation in python](https://github.com/Jagoslav/SPEA2)
+
+- 寻找一个大量点集的 `pareto front` 的快速实现方法仓库 ：[KoenGoe/FastPareto: Fast implementations for finding pareto front in set of points](https://github.com/KoenGoe/FastPareto)
+
+- Pareto-hypernetworks : [AvivNavon/pareto-hypernetworks: Official implementation of Learning The Pareto Front With HyperNetworks [ICLR 2021]](https://github.com/AvivNavon/pareto-hypernetworks)
+
+- [jMetal/jMetalPy: A framework for single/multi-objective optimization with metaheuristics](https://github.com/jMetal/jMetalPy#installation) 📚 [jMetal/jMetaalPY帮助文档](https://jmetal.github.io/jMetalPy/tutorials/observer.html)
 
 #### 📊 基于Pytorch的音频相关损失函数合计仓库：[csteinmetz1/auraloss: Collection of audio-focused loss functions in PyTorch](https://github.com/csteinmetz1/auraloss)
 
@@ -141,11 +148,6 @@ but they do not include both the log magnitude (L1 distance) and spectral conver
 #### 控制系统仓库
 
 - 基于 Python 的控制系统：[python-control/python-control: The Python Control Systems Library is a Python module that implements basic operations for analysis and design of feedback control systems.](https://github.com/python-control/python-control) 📖 [API文档](https://python-control.readthedocs.io/en/latest/intro.html)
-
-
-#### 🦄 多目标优化仓库
-
-- [jMetal/jMetalPy: A framework for single/multi-objective optimization with metaheuristics](https://github.com/jMetal/jMetalPy#installation) 📚 [jMetal/jMetaalPY帮助文档](https://jmetal.github.io/jMetalPy/tutorials/observer.html)
 
 #### 🌀 基于深度学习的自适应滤波相关仓库：
 - Meta-AF: 基于Meta-Learning的自适应滤波仓库：[adobe-research/MetaAF: Control adaptive filters with neural networks.](https://github.com/adobe-research/MetaAF)

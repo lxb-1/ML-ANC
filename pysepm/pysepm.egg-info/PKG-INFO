@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: pysepm
+Version: 0.1
+Summary: Computes Objective Quality measures
+Home-page: https://github.zhaw.ch/scdp/pysepm
+Author: Philipp Schmid
+Author-email: scdp@zhaw.ch
+License: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+License-File: LICENSE
