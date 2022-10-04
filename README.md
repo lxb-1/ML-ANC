@@ -47,6 +47,20 @@
 
 #### 🦄 多目标优化仓库
 
+- 🎞️ 多目标优化相关的视频：
+  - ✨ [多目标优化_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV17S4y1M7oU/?spm_id_from=333.337.search-card.all.click&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
+
+- ✨ MOEAD-python动态+bilibili视频讲解 Github 仓库：[425776024/MOEAD: MOEAD.多目标差分进化算法的学习，Python实现&动态展示过程&b站讲解](https://github.com/425776024/MOEAD)
+  - 📖 [文献](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4358754)
+  - 🌐 [(52条消息) 多目标优化1——基于分解的多目标进化算法（MOEA/D）_冠切云之崔嵬的博客-CSDN博客_基于分解的多目标进化算法](https://blog.csdn.net/sinat_33231573/article/details/80271801)
+  - 🌐 [(52条消息) MOEAD算法中均匀权向量的实现---Python_jj_千寻的博客-CSDN博客_moead算法](https://blog.csdn.net/jiang425776024/article/details/84528415)
+  - 🎞️ [MOEAD python动态展示与实现_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Rf4y117Zk/?vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
+
+- ✨ 多目标启发式算法 Github 仓库：[YuLi2022/MOEA-CODE-PYTHON: python实现多目标启发式算法](https://github.com/YuLi2022/MOEA-CODE-PYTHON)
+  - 📖 1、MODA：多目标查分进化算法：[多目标差分进化在热连轧负荷分配中的应用 - 中国知网](https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2010&filename=KZLY201007012&v=eACTLuuWgXCuSeHoCPfbYi6ACKx9earJFmPbFIEKL1eHZHWXctiVGXjkP5L0FVQO)
+  - 🌐 2、NSGA2 ：[(56条消息) 多目标优化算法（一）NSGA-Ⅱ（NSGA2）_晓风wangchao的博客-CSDN博客_多目标优化算法](https://blog.csdn.net/qq_40434430/article/details/82876572)
+  - 📖 3、MOPSO ：多目标粒子群算法：[MOPSO算法及其在水库优化调度中的应用 - 中国知网](https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2007&filename=JSJC200718086&v=dGa1CTuXauWtahkDR3gOl6bdGGX8ycO6eRIycbCzkXYy2t91HEzutO66IGH%25mmd2BGf08)
+
 - ✨ SPEA2 Github 仓库 (Strength Pareto Evolutionary Algorithm v2) : [Jagoslav/SPEA2: Strength Pareto Evolutionary Algorithm v2 implementation in python](https://github.com/Jagoslav/SPEA2)
 
 - 寻找一个大量点集的 `pareto front` 的快速实现方法仓库 ：[KoenGoe/FastPareto: Fast implementations for finding pareto front in set of points](https://github.com/KoenGoe/FastPareto)
