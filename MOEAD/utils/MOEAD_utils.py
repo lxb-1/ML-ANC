@@ -147,4 +147,70 @@ def update_BTX(moead, P_B, Y):
         if d_y <= d_x:
             # d_y 的切比雪夫距离更小
             moead.Pop[j] = Y[:]
-            F_Y = 
+            F_Y = moead.Test_fun.Func(Y)
+            moead.Pop_FV[j] = F_Y
+            update_EP_By_ID(moead, j, F_Y)
+
+def update_EP_By_ID(moead, id, F_Y):
+    # 如果 id 存在，则更新其对应函数集合的值
+    if id in moead.EP_X_ID:
+        # 拿到所在的位置
+        position_pi = moead.EP_X_ID.index(id)
+        # 更新函数值
+        moead.EP_X_FV[position_pi][:] = F_Y[:]
+
+def update_Z(moead, Y):
+    # 根据 Y 更新 Z 坐标。
+    dz = np.random.rand()
+    F_y = moead.Test_fun.Func(Y)
+    for j in range(moead.Test_fun.Func_num):
+        if moead.problem_type == 0:     # 极小化
+            if moead.Z[j] > F_y[j]:
+                moead.Z[j] = F_y[j] - dz
+        if moead.problem_type == 1:     # 极大化
+            if moead.Z[j] < F_y[j]:
+                moead.Z[j] = F_y[j] + dz
+
+def update_EP_By_Y(moead, id_Y):
+    # 根据 Y 更新前沿
+    # 根据 Y 更新 EP
+    i = 0
+
+    F_Y = moead.Pop_FV[id_Y]    # 拿到 id_Y 的函数值
+    Delet_set = []              # 需要被删除的集合
+    Len = len(moead.EP_X_FV)    # 支配前沿集合的数量
+    for pi in range(Len):
+        # F_Y 是否支配 pi 号个体，如果支配，则提出 pi 号个体
+        if is_dominate(moead, F_Y, moead.EP_X_FV[pi]):
+            # 列入被删除的集合
+            Delet_set.append(pi)
+            break
+        if i != 0:
+            break
+        if is_dominate(moead, moead.EP_X_FV[pi], F_Y):
+            # 它有被别人支配，然后记下来能支配它的个数
+            i += 1
+    # 新的支配前沿的 ID 集合，种群个体 ID
+    new_EP_X_ID = []
+    # 新的支配前沿集合的函数值
+    new_EP_X_FV = []
+    for save_id in range(Len):
+        if save_id not in Delet_set:
+            # 不在 Delet_set 中，则保存
+            new_EP_X_ID.append(moead.EP_X_ID[save_id])
+            new_EP_X_FV.append(moead.EP_X_FV[save_id])
+    # 更新上面计算号的新的支配前沿
+    moead.EP_X_ID = new_EP_X_ID
+    moead.EP_X_FV = new_EP_X_FV
+    # 如果 i == 0，一位置没有人支配 id_Y
+    # 没人支配 id_Y，就将其加入支配前沿
+    if i == 0:
+        # 不在里面直接添加新成员
+        if id_Y not in moead.EP_X_ID:
+            moead.EP_X_ID.append(id_Y)
+            moead.EP_X_FV.append(F_Y)
+        else:
+            # 本来就在里面，则更新即可
+            idy = moead.EP_X_ID.index(id_Y)
+            moead.EP_X_FV[idy] = F_Y[:]
+    return moead.EP_X_ID, moead.EP_X_FV
