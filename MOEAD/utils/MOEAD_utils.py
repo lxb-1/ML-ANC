@@ -139,7 +139,7 @@ def cpt_tchebycheff(moead, idx, X):
     return max
 
 def update_BTX(moead, P_B, Y):
-    # 根据 Y 更新 P_B 集内邻居
+    # 根据 Y 种群更新 P_B 集内邻居
     for j in P_B:
         Xj = moead.Pop[j]
         d_x = cpt_tchebycheff(moead, j, Xj)
@@ -160,9 +160,9 @@ def update_EP_By_ID(moead, id, F_Y):
         moead.EP_X_FV[position_pi][:] = F_Y[:]
 
 def update_Z(moead, Y):
-    # 根据 Y 更新 Z 坐标。
-    dz = np.random.rand()
-    F_y = moead.Test_fun.Func(Y)
+    # 根据 Y 种群更新 Z 坐标。
+    dz = np.random.rand()           # 生成一个 [0-1] 范围内的随机实数
+    F_y = moead.Test_fun.Func(Y)    # 计算 Y 种群的函数值 F_y
     for j in range(moead.Test_fun.Func_num):
         if moead.problem_type == 0:     # 极小化
             if moead.Z[j] > F_y[j]:

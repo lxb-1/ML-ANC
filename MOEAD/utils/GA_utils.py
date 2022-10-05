@@ -8,7 +8,7 @@ import numpy as np
 '''
 
 def Creat_child(moead):
-    # 创建一个个体
+    # 创建一个个体：即一个向量，长度为 Dimention，范围在 moead.Test_fun.Bound 中设定
     child = moead.Test_fun.Bound[0] + (moead.Test_fun.Bound[1] - moead.Test_fun.Bound[0]) * np.random.rand(
         moead.Test_fun.Dimention
     )
@@ -163,31 +163,48 @@ def evolution(moead):
         moead.gen = gen
         # 取出群体数组 moead.Pop 中的每一个个体，进行进化
         # pi 表示个体序号，其中， p——personal，i——index
-        Bi = moead.W_Bi_T[pi]
-        # 随机选取一个 T 内的数，作为 pi 的邻域
-        # （邻域你可以想象成：物种，你总不能人狗杂交吧？所以个体 pi 只能与他的 T个 前后的邻居权重，管的个体杂交进化）
-        # ？比如：T=2，权重(0.1,0.9)约束的个体的邻居是：权重(0,1)、(0.2,0.8)约束的个体。永远固定不变
-        k = np.random.randint(moead.T_size)
-        l = np.random.randint(moead.T_size)
-        # 随机从邻域中选择两个个体，产生新解
-        ik = Bi[k]
-        il = Bi[l]
-        Xi = moead.Pop[pi]
-        Xk = moead.Pop[ik]
-        Xl = moead.Pop[il]
-        # 进化下一代个体：基于自身 Xi + 邻域中随机选择的 2 个 Xk、Xl，并结合 gen 进行进化
-        Y = generate_next(moead, gen, pi, Xi, Xk, Xl)
-        # 计算进化前 Xi 的切比雪夫距离
-        cbxf_i = MOEAD_utils.cpt_tchebycheff(moead, pi, Xi)
-        # 计算进化后 Xi 的切比雪夫距离
-        cbxf_y = MOEAD_utils.cpt_tchebycheff(moead, pi, Y)
-        # 设置 Stop Criteria
-        d = 0.001
-        # 开始比较是否进化出了更好的下一代
-        if cbxf_y < cbxf_i:
-            # 用于绘图：当前进化种群中，哪个正在被进化；draw_w = true 的时候才可见
-            moead.now_y = pi
-            # 计算下一代的函数值
-            F_Y = moead.Test_fun.Func(Y)[:]
-            # 更新函数值到 moead.EP_X_FV 中。拥有了更好的切比雪夫下一代，自然要更新多目标中的目标函数值
-            MOEAD_utils.update_EP_By_ID(moead, pi, F_Y)
+        for pi, p in enumerate(moead.Pop):
+            # 第 pi 编号个体的邻域集
+            Bi = moead.W_Bi_T[pi]
+            # 随机选取一个 T 内的数，作为 pi 的邻域
+            # （邻域你可以想象成：物种，你总不能人狗杂交吧？所以个体 pi 只能与他的 T个 前后的邻居权重，管的个体杂交进化）
+            # ？比如：T=2，权重(0.1,0.9)约束的个体的邻居是：权重(0,1)、(0.2,0.8)约束的个体。永远固定不变
+            k = np.random.randint(moead.T_size)
+            l = np.random.randint(moead.T_size)
+            # 随机从邻域中选择两个个体，产生新解
+            ik = Bi[k]
+            il = Bi[l]
+            Xi = moead.Pop[pi]
+            Xk = moead.Pop[ik]
+            Xl = moead.Pop[il]
+            # 进化下一代个体：基于自身 Xi + 邻域中随机选择的 2 个 Xk、Xl，并结合 gen 进行进化
+            Y = generate_next(moead, gen, pi, Xi, Xk, Xl)
+            # 计算进化前 Xi 的切比雪夫距离
+            cbxf_i = MOEAD_utils.cpt_tchebycheff(moead, pi, Xi)
+            # 计算进化后 Xi 的切比雪夫距离
+            cbxf_y = MOEAD_utils.cpt_tchebycheff(moead, pi, Y)
+            # 设置 Stop Criteria
+            d = 0.001
+            # 开始比较是否进化出了更好的下一代
+            if cbxf_y < cbxf_i:
+                # 用于绘图：当前进化种群中，哪个正在被进化；draw_w = true 的时候才可见
+                moead.now_y = pi
+                # 计算下一代的函数值
+                F_Y = moead.Test_fun.Func(Y)[:]
+                # 更新函数值到 moead.EP_X_FV 中。拥有了更好的切比雪夫下一代，自然要更新多目标中的目标函数值
+                MOEAD_utils.update_EP_By_ID(moead, pi, F_Y)
+                # 进化出更好的切比雪夫下一代了，有可能有更好的理想点了，尝试更新新的理想点
+                MOEAD_utils.update_Z(moead, Y)
+                if abs(cbxf_y - cbxf_i) > d:
+                    # 超过 d 才更新，更新支配前沿，即红色点那些
+                    MOEAD_utils.update_EP_By_Y(moead, pi)
+            MOEAD_utils.update_BTX(moead, Bi, Y)    # 
+        # 是否需要动态展示
+        if moead.need_dynamic:
+            Draw_utils.plt.cla()
+            if moead.draw_w:
+                Draw_utils.draw_W(moead)
+            Draw_utils.draw_MOEAD_Pareto(moead, moead.name + ",gen:" + str(gen) + "")
+            Draw_utils.plt.pause(0.001)
+        print('迭代 %s,支配前沿个体数量len(moead.EP_X_ID) :%s,moead.Z:%s' % (gen, len(moead.EP_X_ID), moead.Z))
+    return moead.EP_X_ID
