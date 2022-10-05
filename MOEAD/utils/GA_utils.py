@@ -189,3 +189,5 @@ def evolution(moead):
             moead.now_y = pi
             # 计算下一代的函数值
             F_Y = moead.Test_fun.Func(Y)[:]
+            # 更新函数值到 moead.EP_X_FV 中。拥有了更好的切比雪夫下一代，自然要更新多目标中的目标函数值
+            MOEAD_utils.update_EP_By_ID(moead, pi, F_Y)
