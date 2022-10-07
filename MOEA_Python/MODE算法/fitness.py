@@ -6,6 +6,15 @@ import numpy as np
 from function import *
 
 def fitness(pops, func):
+    """群体或个体适应度计算函数
+
+    Args:
+        pops (_type_): 种群
+        func (_type_): 目标函数
+
+    Returns:
+        fits (_type_) : 适应度，其形状为 种群规模 (nPop) * 目标函数个数 (nF)
+    """
     # 如果是 1 维则需要转换为 2 维
     if pops.ndim == 1:
         pops = pops.reshape(1, len(pops))

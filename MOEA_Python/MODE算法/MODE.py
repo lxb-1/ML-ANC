@@ -44,22 +44,24 @@ def MODE(nIter, nChr, nPop, F, Cr, func, lb, rb):
 
         # 产生变异向量
         mutantPops = mutate(parPops, F, lb, rb)
-
         # 产生实验向量
-        
-
+        trialPops = crossover(parPops, mutantPops, Cr)
         # 重新计算适应度
-        
-        # 合成新的物种
-        
-        # 非支配排序
-        
-        # 计算拥挤度
-        
+        trialFits = fitness(trialPops, func)
+
+        # 合成新的物种。？？？？这里我有个问题没有搞明白，新合成的物种的种群规模的变化？？？？？？
+        pops = np.concatenate((parPops, trialPops), axis=0)
+        fits = np.concatenate((parFits, trialFits), axis=0)
+        ranks = nonDominationSort(pops, fits)               # 非支配排序
+        distances = crowdingDistanceSort(pops, fits, ranks) # 计算拥挤度
+
+        # 种群选择
+        parPops, parFits = select1(nPop, pops, fits, ranks, distances)
+
         iter += 1
     print("\n")
     # 获取等级为 0，即实际求解得到的 Pareto 前沿
-    paretoPops = 1
-    paretoFits = 1
+    paretoPops = pops[ranks==0]
+    paretoFits = fits[ranks==0]
 
     return paretoPops, paretoFits

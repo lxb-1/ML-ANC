@@ -50,6 +50,10 @@
 - 🎞️ 多目标优化相关的视频：
   - ✨ [多目标优化_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV17S4y1M7oU/?spm_id_from=333.337.search-card.all.click&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
 
+- ✨ **pymoo:** Multi-objective Optimization in Python : [anyoptimization/pymoo: NSGA2, NSGA3, R-NSGA3, MOEAD, Genetic Algorithms (GA), Differential Evolution (DE), CMAES, PSO](https://github.com/anyoptimization/pymoo)
+  - 🏠 [pymoo 官网及手册](https://www.pymoo.org/)
+  - 📖 [论文：Pymmo: Multi-Objective Optimization in Python](https://ieeexplore.ieee.org/document/9078759)
+
 - ✨ 多目标启发式算法 Github 仓库：[YuLi2022/MOEA-CODE-PYTHON: python实现多目标启发式算法](https://github.com/YuLi2022/MOEA-CODE-PYTHON)
   - 📖 1、MODA：多目标查分进化算法：[多目标差分进化在热连轧负荷分配中的应用 - 中国知网](https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2010&filename=KZLY201007012&v=eACTLuuWgXCuSeHoCPfbYi6ACKx9earJFmPbFIEKL1eHZHWXctiVGXjkP5L0FVQO)
   - 🌐 2、NSGA2 ：[(56条消息) 多目标优化算法（一）NSGA-Ⅱ（NSGA2）_晓风wangchao的博客-CSDN博客_多目标优化算法](https://blog.csdn.net/qq_40434430/article/details/82876572)
@@ -168,23 +172,6 @@ but they do not include both the log magnitude (L1 distance) and spectral conver
 - Auto-DSP：基于深度学习的声学回声消除器优化仓库：[jmcasebeer/autodsp: Train custom adaptive filter optimizers without hand tuning or extra labels.](https://github.com/jmcasebeer/autodsp)
 
 
-#### 🖼️ 计算机视觉相关仓库：
-
-##### 计算机视觉架构仓库：
-
-- yolo5目标检测架构及COCO数据集上的预训练模型仓库：[ultralytics/yolov5: YOLOv5 🚀 in PyTorch > ONNX > CoreML > TFLite](https://github.com/ultralytics/yolov5)
-- （FaceBook）前沿图片目标检测与分割算法包：[facebookresearch/detectron2: Detectron2 is a platform for object detection, segmentation and other visual recognition tasks.](https://github.com/facebookresearch/detectron2)
-- 前沿图片检测框架工具箱`mmdetection`：[open-mmlab/mmdetection: OpenMMLab Detection Toolbox and Benchmark](https://github.com/open-mmlab/mmdetection)，该工具箱包括Faster RCNN, Mask RCNN, RetinaNet等工具包。
-- Huggingface Transformers（一款很火的Transformers算法工具包）：[huggingface/transformers: 🤗 Transformers: State-of-the-art Machine Learning for Pytorch, TensorFlow, and JAX.](https://github.com/huggingface/transformers)
-
-- Sparse R-CNN仓库:[PeizeSun/SparseR-CNN: End-to-End Object Detection with Learnable Proposal, CVPR2021](https://github.com/PeizeSun/SparseR-CNN)
-- Center Mask2仓库：[youngwanLEE/centermask2: CenterMask : Real-time Anchor-Free Instance Segmentation, in CVPR 2020](https://github.com/youngwanLEE/centermask2)
-
-##### 计算机视觉学习资料仓库：
-
-- 动手学深度学习（Dive into Deep Learning，D2L.ai）：[d2l-ai/d2l-zh: 《动手学深度学习》：面向中文读者、能运行、可讨论。中英文版被60个国家的400所大学用于教学。](https://github.com/d2l-ai/d2l-zh)
-- 深度学习图片处理算法实例：[WZMIAOMIAO/deep-learning-for-image-processing: deep learning for image processing including classification and object-detection etc.](https://github.com/WZMIAOMIAO/deep-learning-for-image-processing)
-
 ### 📚 帮助文档：
 - pyroomacoustics房间音频处理包帮助手册链接：[Contributing — Pyroomacoustics 0.6.0 documentation](https://pyroomacoustics.readthedocs.io/en/pypi-release/contributing.html)
 
@@ -194,15 +181,6 @@ but they do not include both the log magnitude (L1 distance) and spectral conver
 - 音乐音频python分析包帮助文档链接：[librosa — librosa 0.9.2 documentation](https://librosa.org/doc/latest/index.html)
 
 - （FaceBook）前沿序列建模工具包（Fairseq）帮助文档链接：[fairseq documentation — fairseq 0.12.2 documentation](https://fairseq.readthedocs.io/en/latest/index.html)
-
-
-- yolo5目标检测架构及COCO数据集上的预训练模型帮助文档链接：[Quick Start - YOLOv5 Documentation](https://docs.ultralytics.com/quick-start/)
-- （FaceBook）前沿图片目标检测与分割算法包帮助文档链接：[Welcome to detectron2’s documentation! — detectron2 0.6 documentation](https://detectron2.readthedocs.io/en/latest/)
-
-- mmdtection图片检测框架帮助手册链接：[Welcome to MMDetection’s documentation! — MMDetection 2.25.1 文档](https://mmdetection.readthedocs.io/zh_CN/stable/)
-- Huggingface Transformers仓库算法工具包帮助文档链接：[🤗 Transformers](https://huggingface.co/docs/transformers/index)
-
-- 动手学深度学习（Dive into Deep Learning，D2L.ai）帮助文档链接：[《动手学深度学习》 — 动手学深度学习 2.0.0-beta1 documentation](https://zh.d2l.ai/index.html)
 
 
 ### 📰 相关论文链接
@@ -216,11 +194,7 @@ but they do not include both the log magnitude (L1 distance) and spectral conver
 - Meta-AF: 基于Meta-Learning的自适应滤波文献：[[2204.11942] Meta-AF: Meta-Learning for Adaptive Filters](https://arxiv.org/abs/2204.11942)
 - Auto-DSP：基于深度学习的声学回声消除器优化文献：[[2110.04284] Auto-DSP: Learning to Optimize Acoustic Echo Cancellers](https://arxiv.org/abs/2110.04284)
 
-### 📹 相关学习视频：
-- [基于深度学习的目标检测算法!小目标Trick | Detectron2、YOLOv5都通用的小目标检测教程来袭！_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV16G411W7Wp?spm_id_from=333.337.search-card.all.click&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
-- [使用Pytorch实现Grad-CAM并绘制热力图_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1e3411j7x7/?spm_id_from=333.788.recommend_more_video.-1&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
-
-🧰 **音频数据集**：
+💿 **音频数据集**：
 
 - TIMIT音频数据集：[TIMIT Corpus — Pyroomacoustics 0.6.0 documentation](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.timit.html#the-timit-dataset)
 
