@@ -54,16 +54,16 @@
   - 🏠 [pymoo 官网及手册](https://www.pymoo.org/)
   - 📖 [论文：Pymmo: Multi-Objective Optimization in Python](https://ieeexplore.ieee.org/document/9078759)
 
+- ✨ Geatpy 2 ： The Genetic and Evolutionary Algorithm Toolbox for Python with high performance : [geatpy-dev/geatpy: Evolutionary algorithm toolbox and framework with high performance for Python](https://github.com/geatpy-dev/geatpy)
+  - 🏠 [Geatpy](http://geatpy.com/)
+
+- ✨ DEAP, a novel evolutionary cimputation frmework for rapid prototyping and testing of ideas : [DEAP/deap: Distributed Evolutionary Algorithms in Python](https://github.com/DEAP/deap)
+  - 🏠 [DEAP documentation — DEAP 1.3.3 documentation](https://deap.readthedocs.io/en/master/)
+
 - ✨ 多目标启发式算法 Github 仓库：[YuLi2022/MOEA-CODE-PYTHON: python实现多目标启发式算法](https://github.com/YuLi2022/MOEA-CODE-PYTHON)
   - 📖 1、MODA：多目标查分进化算法：[多目标差分进化在热连轧负荷分配中的应用 - 中国知网](https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2010&filename=KZLY201007012&v=eACTLuuWgXCuSeHoCPfbYi6ACKx9earJFmPbFIEKL1eHZHWXctiVGXjkP5L0FVQO)
   - 🌐 2、NSGA2 ：[(56条消息) 多目标优化算法（一）NSGA-Ⅱ（NSGA2）_晓风wangchao的博客-CSDN博客_多目标优化算法](https://blog.csdn.net/qq_40434430/article/details/82876572)
   - 📖 3、MOPSO ：多目标粒子群算法：[MOPSO算法及其在水库优化调度中的应用 - 中国知网](https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2007&filename=JSJC200718086&v=dGa1CTuXauWtahkDR3gOl6bdGGX8ycO6eRIycbCzkXYy2t91HEzutO66IGH%25mmd2BGf08)
-
-- ✨ (我没有复现！！) MOEAD-python动态+bilibili视频讲解 Github 仓库：[425776024/MOEAD: MOEAD.多目标差分进化算法的学习，Python实现&动态展示过程&b站讲解](https://github.com/425776024/MOEAD)
-  - 📖 [文献](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4358754)
-  - 🌐 [(52条消息) 多目标优化1——基于分解的多目标进化算法（MOEA/D）_冠切云之崔嵬的博客-CSDN博客_基于分解的多目标进化算法](https://blog.csdn.net/sinat_33231573/article/details/80271801)
-  - 🌐 [(52条消息) MOEAD算法中均匀权向量的实现---Python_jj_千寻的博客-CSDN博客_moead算法](https://blog.csdn.net/jiang425776024/article/details/84528415)
-  - 🎞️ [MOEAD python动态展示与实现_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Rf4y117Zk/?vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
 
 - ✨ SPEA2 Github 仓库 (Strength Pareto Evolutionary Algorithm v2) : [Jagoslav/SPEA2: Strength Pareto Evolutionary Algorithm v2 implementation in python](https://github.com/Jagoslav/SPEA2)
 
@@ -72,6 +72,11 @@
 - Pareto-hypernetworks : [AvivNavon/pareto-hypernetworks: Official implementation of Learning The Pareto Front With HyperNetworks [ICLR 2021]](https://github.com/AvivNavon/pareto-hypernetworks)
 
 - [jMetal/jMetalPy: A framework for single/multi-objective optimization with metaheuristics](https://github.com/jMetal/jMetalPy#installation) 📚 [jMetal/jMetaalPY帮助文档](https://jmetal.github.io/jMetalPy/tutorials/observer.html)
+
+#### 🎛️ 并行计算相关仓库：
+- Dask : A flexible parallel computing library for analytics : [dask/dask: Parallel computing with task scheduling](https://github.com/dask/dask)
+  - 📚 [Dask 文档](https://docs.dask.org/en/latest/install.html)
+  - 🏠 [Dask 官网](https://www.dask.org/)
 
 #### 📊 基于Pytorch的音频相关损失函数合计仓库：[csteinmetz1/auraloss: Collection of audio-focused loss functions in PyTorch](https://github.com/csteinmetz1/auraloss)
 

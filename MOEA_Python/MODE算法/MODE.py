@@ -1,7 +1,7 @@
 '''
 @File    :   MODE.py
-@Time    :   2020/11/04 
-@Author  :   Yu Li 
+@Time    :   2020/11/04
+@Author  :   Yu Li
 @describe:   基于快速非支配排序算法的多目标差分进化算法主程序 
 '''
 
