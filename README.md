@@ -204,4 +204,3 @@ but they do not include both the log magnitude (L1 distance) and spectral conver
 - TIMIT音频数据集：[TIMIT Corpus — Pyroomacoustics 0.6.0 documentation](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.timit.html#the-timit-dataset)
 
 - 回音消除研究数据集（AEC-Challenge）：[microsoft/AEC-Challenge: AEC Challenge](https://github.com/microsoft/AEC-Challenge) [相关论文：ICASSP 2021 Acoustic Echo Cancellation Challenge: Datasets, Testing Framework, and Results](https://arxiv.org/pdf/2009.04972.pdf)
-- 
