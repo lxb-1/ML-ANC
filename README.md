@@ -10,6 +10,9 @@
 
 - 房间音频信号处理包：[LCAV/pyroomacoustics: Pyroomacoustics is a package for audio signal processing for indoor applications. It was developed as a fast prototyping platform for beamforming algorithms in indoor scenarios.](https://github.com/LCAV/pyroomacoustics) 📖 [API文档](https://pyroomacoustics.readthedocs.io/en/pypi-release/pyroomacoustics.datasets.html#)
 
+- 滤波器设计包：FilterPy - Kalman filters and other optimal and non-optimal estimation filters in Python : [rlabbe/filterpy: Python Kalman filtering and optimal estimation library. Implements Kalman filter, particle filter, Extended Kalman filter, Unscented Kalman filter, g-h (alpha-beta), least squares, H Infinity, smoothers, and more. Has companion book 'Kalman and Bayesian Filters in Python'.](https://github.com/rlabbe/filterpy)
+  - 🏠 [FilterPy — FilterPy 1.4.4 documentation](https://filterpy.readthedocs.io/en/latest/)
+
 - 音频目标质量和可解释性指标Python实现仓库**pysepm**：[schmiph2/pysepm: Python implementation of performance metrics in Loizou's Speech Enhancement book](https://github.com/schmiph2/pysepm)
 
 - **DeepFilterNet：**[Rikorose/DeepFilterNet: Noise supression using deep filtering](https://github.com/Rikorose/DeepFilterNet)
@@ -24,9 +27,8 @@
 
 - `LEAF`: A Learnable Audio Frontend : [google-research/leaf-audio: LEAF is a learnable alternative to audio features such as mel-filterbanks, that can be initialized as an approximation of mel-filterbanks, and then be trained for the task at hand, while using a very small number of parameters.](https://github.com/google-research/leaf-audio)
 
-- [smitkiri/urban-sound-classification: Classification of audio signals using PyTorch](https://github.com/smitkiri/urban-sound-classification)
-- 
 - python_speech_features仓库：[jameslyons/python_speech_features: This library provides common speech features for ASR including MFCCs and filterbank energies.](https://github.com/jameslyons/python_speech_features)
+
 - [sambittarai/Audio-Signal-Processing-using-Deep-Learning: This repository includes an entire workflow for Audio Classification using Deep Learning.](https://github.com/sambittarai/Audio-Signal-Processing-using-Deep-Learning)
 
 - ✨ WavEncoder:[shangeth/wavencoder: WavEncoder is a Python library for encoding audio signals, transforms for audio augmentation, and training audio classification models with PyTorch backend.](https://github.com/shangeth/wavencoder)。它设计了很多特有的块和层，可以参考文献中关于WavEncoder的相关文献。
@@ -38,12 +40,6 @@
 - 语言识别到文本实现以及在线深度学习实现仓库（36.4k star）：[CorentinJ/Real-Time-Voice-Cloning: Clone a voice in 5 seconds to generate arbitrary speech in real-time](https://github.com/CorentinJ/Real-Time-Voice-Cloning) 作者硕士论文链接：[Master thesis : Automatic Multispeaker Voice Cloning - s123578Jemine2019.pdf](https://matheo.uliege.be/bitstream/2268.2/6801/5/s123578Jemine2019.pdf)
 
 - 音乐音频python分析包：[librosa/librosa: Python library for audio and music analysis](https://github.com/librosa/librosa)
-
-- PyTorch-Kaldi语音识别工具包：[mravanelli/pytorch-kaldi: pytorch-kaldi is a project for developing state-of-the-art DNN/RNN hybrid speech recognition systems. The DNN part is managed by pytorch, while feature extraction, label computation, and decoding are performed with the kaldi toolkit.](https://github.com/mravanelli/pytorch-kaldi)
-
-- （FaceBook）前沿序列建模工具包（Fairseq）：[facebookresearch/fairseq: Facebook AI Research Sequence-to-Sequence Toolkit written in Python.](https://github.com/facebookresearch/fairseq)
-
-- Speechbrain：[speechbrain/speechbrain: A PyTorch-based Speech Toolkit](https://github.com/speechbrain/speechbrain)
 
 #### 🦄 多目标优化仓库
 
@@ -66,8 +62,6 @@
   - 📖 3、MOPSO ：多目标粒子群算法：[MOPSO算法及其在水库优化调度中的应用 - 中国知网](https://kns.cnki.net/kcms/detail/detail.aspx?dbcode=CJFD&dbname=CJFD2007&filename=JSJC200718086&v=dGa1CTuXauWtahkDR3gOl6bdGGX8ycO6eRIycbCzkXYy2t91HEzutO66IGH%25mmd2BGf08)
 
 - ✨ SPEA2 Github 仓库 (Strength Pareto Evolutionary Algorithm v2) : [Jagoslav/SPEA2: Strength Pareto Evolutionary Algorithm v2 implementation in python](https://github.com/Jagoslav/SPEA2)
-
-- 寻找一个大量点集的 `pareto front` 的快速实现方法仓库 ：[KoenGoe/FastPareto: Fast implementations for finding pareto front in set of points](https://github.com/KoenGoe/FastPareto)
 
 - Pareto-hypernetworks : [AvivNavon/pareto-hypernetworks: Official implementation of Learning The Pareto Front With HyperNetworks [ICLR 2021]](https://github.com/AvivNavon/pareto-hypernetworks)
 
