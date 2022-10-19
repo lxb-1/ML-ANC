@@ -23,9 +23,6 @@
 
 #### 🦄 多目标优化仓库
 
-- 🎞️ 多目标优化相关的视频：
-  - ✨ [多目标优化_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV17S4y1M7oU/?spm_id_from=333.337.search-card.all.click&vd_source=5a45e7b7d8a4889aab6645f3fbfd5fee)
-
 - ✨ **pymoo:** Multi-objective Optimization in Python : [anyoptimization/pymoo: NSGA2, NSGA3, R-NSGA3, MOEAD, Genetic Algorithms (GA), Differential Evolution (DE), CMAES, PSO](https://github.com/anyoptimization/pymoo)
   - 🏠 [pymoo 官网及手册](https://www.pymoo.org/)
   - 📖 [论文：Pymmo: Multi-Objective Optimization in Python](https://ieeexplore.ieee.org/document/9078759)
@@ -54,7 +51,6 @@
 
 ### 📚 帮助文档：
 - pyroomacoustics房间音频处理包帮助手册链接：[Contributing — Pyroomacoustics 0.6.0 documentation](https://pyroomacoustics.readthedocs.io/en/pypi-release/contributing.html)
-
 
 💿 **音频数据集**：
 
