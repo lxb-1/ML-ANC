@@ -27,6 +27,8 @@
   - 🏠 [pymoo 官网及手册](https://www.pymoo.org/)
   - 📖 [论文：Pymmo: Multi-Objective Optimization in Python](https://ieeexplore.ieee.org/document/9078759)
 
+-  CMA-ES:[CMA-ES/pycma: Python implementation of CMA-ES](https://github.com/CMA-ES/pycma)
+
 - ✨ Geatpy 2 ： The Genetic and Evolutionary Algorithm Toolbox for Python with high performance : [geatpy-dev/geatpy: Evolutionary algorithm toolbox and framework with high performance for Python](https://github.com/geatpy-dev/geatpy)
   - 🏠 [Geatpy](http://geatpy.com/)
 
